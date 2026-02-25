@@ -36,7 +36,9 @@ How to create a good prompt to mimic simple agent flows?
     🧠 What Is a Simple Agent Flow?
 
 A basic agent usually: Understands the goal Breaks it into steps Decides what to do next Produces structured output Optionally self-checks
+
 ---
+
 Ex0_Environment_and_Libraries.md
 Objective: Set up the environment for Python development.
 
