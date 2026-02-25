@@ -14,7 +14,9 @@ Ex0_Environment_and_Libraries.md
     or
 # word = "Hello, World!"
 ## print(word)
-    ---
+
+---
+
 Ex1_Reducing_false_or_invented_facts.md
     Objective: Identify and correct prompts that produce wrong or made-up information.
 
@@ -36,7 +38,9 @@ Ex1_Reducing_false_or_invented_facts.md
 
     Compare both results and note the differences.
 # AI does exactly what it is asked to. It creates imaginary countries and capital even though it's fake and as well, paste real countries and their capital with at least one country from a continent. This means that our prompt may be wrong but we'll still a result(wrong) because AI does what it's asked. 
-          ---
+
+---
+
 Ex2_Adding_source_or_data_constraints.md
           Exercise 2: Adding Source or Data Constraints
 
@@ -67,7 +71,9 @@ Objective: Force responses to be tied to given material.
 
         Question:
         Who said, "every object continue to move in motion except acted upon by an external force"?
-          ---
+
+---
+
 Ex3_Using_delimiters_to_define_context.md
           Objective: Restrict responses to a specific block of text.
 
