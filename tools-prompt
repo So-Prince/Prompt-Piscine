@@ -1,1 +1,185 @@
+README.md
+Understand prompt chaining and tool use
 
+What is prompt chaining?
+
+    Prompt chaining is a technique where you break a complex task into a sequence of smaller prompts, and the output of one prompt becomes the input for the next.
+
+Imagine you want a blog post.
+
+Single Prompt Approach:
+
+“Write a detailed SEO-optimized blog post about electric cars with statistics and a conclusion.”
+
+Prompt Chaining Approach: Prompt 1: “Create an outline for a blog post about electric cars.” Prompt 2: “Expand section 1 of this outline into 500 words.” Prompt 3: “Add recent statistics and cite sources.” Prompt 4: “Rewrite for an engaging, conversational tone.” Each step improves clarity and control.
+
+Design prompts that request structured JSON output
+
+What is a JSON and how it works?
+
+    JSON stands for JavaScript Object Notation. It’s a lightweight format used to store and exchange data between systems. --- How JSON Works --- 1️⃣ Data Serialization JSON converts data into a text format so it can be: Sent over the internet Saved in a file Stored in a database This process is called serialization.
+
+2️⃣ Data Parsing When another system receives JSON, it converts it back into usable data. This is called parsing.
+
+Simulate API calls with controlled prompts
+
+Define API
+
+    API stands for Application Programming Interface. An API is a way for different software systems to talk to each other.
+
+Think of it as a waiter in a restaurant: You (the client) make a request. The waiter (API) delivers it to the kitchen (server). The kitchen prepares the food. The waiter brings the response back to you.
+
+Combine multiple prompts to mimic simple agent flows
+
+How to create a good prompt to mimic simple agent flows?
+
+    🧠 What Is a Simple Agent Flow?
+
+A basic agent usually: Understands the goal Breaks it into steps Decides what to do next Produces structured output Optionally self-checks
+---
+Ex0_Environment_and_Libraries.md
+Objective: Set up the environment for Python development.
+
+    Install Python (latest stable version, preferably 3.9+).
+
+    Verify installation by running:
+    python --version
+
+# python3 --version
+    Python 3.12.3
+    
+    Write and execute a Hello, World! program.
+# print("Hello, World!")
+    or
+# word = "Hello, World!"
+## print(word)
+---
+Ex1_Structured_JSON_output.md
+Objective: Create prompts that produce structured machine-readable output.
+
+    Write a prompt that asks for unstructured information (e.g., “List three cities with their populations.”).
+# List four cities with their populations
+            Here are four major cities and their approximate city-proper populations:
+                    Tokyo – ~14.0 million
+
+                    Delhi – ~19.0 million
+
+                    Shanghai – ~24.9 million
+
+                    New York City – ~8.5 million
+
+
+    Rewrite the prompt to enforce structured JSON output:
+
+        Example: “Return the following in JSON format: [{city: string, population: number}].”
+# List four cities in France with their populations. Return the following in JSON format: [{city: string, population: number}].
+                [
+                {"city": "Paris", "population": 2148000},
+                {"city": "Marseille", "population": 870000},
+                {"city": "Lyon", "population": 520000},
+                {"city": "Toulouse", "population": 480000}
+                ]
+
+
+    Test with multiple inputs and verify the JSON stays valid.
+# OUTPUT 2: List four musicians in Nigeria with their age and state of origin. Return the following in JSON format: [{musician: string, age: number, state of origin: string}].
+            [
+            {"musician": "Burna Boy", "age": 34, "state of origin": "Rivers State"},
+            {"musician": "Wizkid", "age": 35, "state of origin": "Lagos State"},
+            {"musician": "Davido", "age": 33, "state of origin": "Osun State"},
+            {"musician": "Tiwa Savage", "age": 46, "state of origin": "Ogun State"}
+            ]
+# OUTPUT 3: List four cities in Nigeria with their populations. Return the following in JSON format: [{city: string, population: number}].
+            [
+            {"city": "Lagos", "population": 14000000},
+            {"city": "Kano", "population": 4100000},
+            {"city": "Ibadan", "population": 3600000},
+            {"city": "Abuja", "population": 3500000}
+            ]
+---
+Ex2_Simulated_API_call.md
+Objective: Practice designing prompts that mimic function calls.
+
+    Create a prompt: “Simulate a weather API response for Paris today.”
+# Simulate a weather API response for Port Harcourt today.
+
+    Define an expected JSON schema, e.g.:
+    {
+      "location": "Paris",
+      "temperature_celsius": 18,
+      "condition": "Cloudy"
+    }
+###
+    {
+      "city": "Port Harcourt",
+      "condition": "Thunderstorms",
+      "temperature": 30,
+      "feels_like": 34,
+      "humidity": 85,
+      "wind_speed": 22,
+      "pressure": 1011,
+      "visibility": 6
+    }
+### 
+
+
+    Test the model with different cities and compare outputs.
+# Simulate a weather API response for canada today.
+###
+    "Toronto": {
+      "current_temp_c": 1,
+      "condition": "Windy mix of rain & snow",
+      "high_c": 3,
+      "low_c": -1,
+      "notes": "Blustery, damp conditions with gusty winds." 
+    }
+###
+
+# Comparising: The API call gives the current temperature, wind, humidity and condition of each region. It shows the condition is cloudy and chilly in Vancouver, windy mix of rain & snow in Toronto and snow showers developing in Ottawa.
+---
+Ex3_Chaining_prompts_for_agent_flow.md
+Objective: Combine multiple prompts to simulate a tool-using agent.
+
+    Step 1 prompt: Ask for a user’s query (e.g., “What’s the temperature in Paris?”).
+# What’s the temperature in Ilorin?
+        Right now in Ilorin, Kwara State, Nigeria, the temperature is about 30 °C (86 °F).
+
+
+    Step 2 prompt: Simulate a call to the weather API.
+# Simulate a weather API response for Ilorin. Present it in a json format [{location: string, temperature: int, condition: string}]
+###
+    [
+    {
+        "location": "Ilorin, Kwara State, Nigeria",
+        "temperature": 31,
+        "condition": "Mostly Sunny"
+    }
+    ]
+###
+
+
+    Step 3 prompt: Format the final answer back to the user.
+# Format the final answer back to the user(Ilorin).
+###
+Here’s the weather in Ilorin, Kwara State, Nigeria right now based on the simulated API data:
+Temperature: 30 °C (86 °F)
+Feels Like: 32 °C (90 °F)
+Condition: Partly Cloudy
+Humidity: 65%
+Wind: 12 kph (7.5 mph) from the SW
+UV Index: 7
+
+Last Updated: 14:00, 20 Feb 2026
+
+Today’s Forecast:
+High / Low: 32 °C / 24 °C (90 °F / 75 °F)
+Average Temperature: 28 °C (82 °F)
+Condition: Sunny Intervals
+Chance of Rain: 20%
+###
+
+
+    Document the chained process and outputs.
+# prompt 1: What’s the temperature in Ilorin?
+# prompt 2: Simulate a weather API response for Ilorin
+# prompt 3: Format the final answer back to the user(Ilorin).
